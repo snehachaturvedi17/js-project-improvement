@@ -1,0 +1,336 @@
+/* basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0a0a0f;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* background gradient blobs */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* purple blob top left */
+body::before {
+    width: 420px;
+    height: 420px;
+    background: #7c3aed;
+    top: -100px;
+    left: -100px;
+}
+
+/* pink blob bottom right */
+body::after {
+    width: 380px;
+    height: 380px;
+    background: #e94560;
+    bottom: -120px;
+    right: -120px;
+}
+
+.container {
+    width: 100%;
+    max-width: 760px;
+    position: relative;
+    z-index: 1;
+    /* above background blobs */
+}
+
+/* upload screen card */
+.upload-screen {
+    /* glass effect */
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    padding: 56px 36px;
+    text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.upload-screen:hover {
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 0 40px rgba(124, 58, 237, 0.12);
+}
+
+/* heading text */
+.upload-screen h1 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.upload-screen p {
+    color: #555;
+    font-size: 0.82rem;
+    margin-bottom: 32px;
+}
+
+/* input and button row */
+.input-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.input-row input {
+    flex: 1;
+    padding: 13px 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    font-size: 0.82rem;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s;
+}
+
+.input-row input:focus {
+    border-color: rgba(124, 58, 237, 0.5);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.input-row input::placeholder {
+    color: #444;
+}
+
+/* load button */
+.btn {
+    padding: 13px 24px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #7c3aed, #e94560);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* or divider text */
+.divider {
+    color: #333;
+    font-size: 0.75rem;
+    margin: 4px 0 18px;
+    letter-spacing: 2px;
+}
+
+/* file upload label */
+.file-label {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    color: #666;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+
+.file-label:hover {
+    border-color: rgba(124, 58, 237, 0.4);
+    color: #fff;
+    background: rgba(124, 58, 237, 0.08);
+}
+
+/* hide file input */
+#fileInput {
+    display: none;
+}
+
+/* video screen */
+.player-screen {
+    display: none;
+}
+
+/* video container */
+.video-wrap {
+    background: #000;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: none;
+}
+
+.video-wrap video,
+.video-wrap iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* controls bar */
+.controls {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    padding: 14px 20px 18px;
+}
+
+/* progress bar */
+.progress-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: height 0.15s;
+}
+
+.progress-track:hover {
+    height: 6px;
+}
+
+/* progress fill */
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7c3aed, #e94560);
+    border-radius: 2px;
+    pointer-events: none;
+    transition: width 0.1s linear;
+}
+
+/* controls row */
+.controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-side,
+.right-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* control buttons */
+.ctrl-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.15s;
+    padding: 4px;
+}
+
+.ctrl-btn:hover {
+    color: #fff;
+    transform: scale(1.12);
+}
+
+/* volume slider */
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 72px;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.12);
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(124, 58, 237, 0.5);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(124, 58, 237, 0.5);
+}
+
+/* time text */
+.time-display {
+    font-size: 0.72rem;
+    color: #444;
+    font-variant-numeric: tabular-nums;
+    min-width: 86px;
+}
+
+/* back button */
+.back-btn {
+    font-size: 0.74rem;
+    color: #3d3d3d;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: #a78bfa;
+}
+
+/* youtube note */
+.note {
+    margin-top: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 3px solid #7c3aed;
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px;
+    font-size: 0.76rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.note strong {
+    color: #a78bfa;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- character encoding -->
+  <meta charset="UTF-8" />
+
+  <!-- responsive for all devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- page title -->
+  <title>Custom Video Player</title>
+
+  <!-- linking css file -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- main container -->
+  <div class="container">
+
+    <!-- upload screen -->
+    <div class="upload-screen" id="uploadScreen">
+      <!-- heading -->
+      <h1>🎬 Custom Video Player</h1>
+
+      <!-- small info text -->
+      <p>Upload a video file or paste a YouTube URL</p>
+
+      <!-- youtube url input -->
+      <div class="input-row">
+        <input type="text" id="urlInput" placeholder="Paste a YouTube URL here…" />
+        <!-- load button -->
+        <button class="btn" onclick="loadURL()">Load</button>
+      </div>
+
+      <!-- divider -->
+      <div class="divider">— or —</div>
+
+      <!-- file upload label -->
+      <label class="file-label" for="fileInput">📁 Choose File</label>
+
+      <!-- file input -->
+      <input type="file" id="fileInput" accept="video/*" onchange="loadFile(event)" />
+    </div>
+
+    <!-- video player screen -->
+    <div class="player-screen" id="playerScreen">
+
+      <!-- video added using js -->
+      <div class="video-wrap" id="videoWrap"></div>
+
+      <!-- controls bar -->
+      <div class="controls" id="controlsBar">
+
+        <!-- progress bar -->
+        <div class="progress-track" id="progressTrack">
+          <!-- progress fill -->
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- controls row -->
+        <div class="controls-row">
+
+          <!-- left controls -->
+          <div class="left-side">
+            <!-- play pause button -->
+            <button class="ctrl-btn" id="playBtn" onclick="togglePlay()">⏵</button>
+
+            <!-- mute unmute button -->
+            <button class="ctrl-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
+
+            <!-- volume slider -->
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1"
+              oninput="changeVolume(this.value)" />
+
+            <!-- time display -->
+            <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+          </div>
+
+          <!-- right controls -->
+          <div class="right-side">
+            <!-- fullscreen button -->
+            <button class="ctrl-btn" id="fullscreenBtn" onclick="toggleFullscreen()">⛶</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- back button -->
+      <button class="back-btn" onclick="goBack()">← Back</button>
+    </div>
+
+    <!-- note for youtube videos -->
+    <div class="note" id="youtubeNote" style="display: none;">
+      <strong>Note:</strong> YouTube videos use YouTube's own controls because
+      JavaScript can't control an iframe from another website. Custom controls
+      here only work with local file uploads.
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
